@@ -7,12 +7,11 @@ class DBHelper {
     final dbPath = await sql.getDatabasesPath();
     // 지정한 경로에 db가 있으면 그 db를 열고, 없으면 새로 하나 염
     // 새로 열기 위해서 onCreate에 정의된 함수를 실행함.
-    print(path.join(dbPath, 'places.db'));
     return sql.openDatabase(
       path.join(dbPath, 'places.db'),
       onCreate: (db, version) {
         return db.execute(
-            'CREATE TABLE places(id TEXT PRIMARY KEY, title TEXT, image TEXT)');
+            'CREATE TABLE places(id TEXT PRIMARY KEY, title TEXT, image TEXT, loc_lat REAL, loc_lng REAL, address TEXT)');
       },
       version: 1,
     );
